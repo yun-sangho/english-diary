@@ -1,0 +1,16 @@
+export const DIARY_QUESTIONS = [
+  'Please tell me about yourself.',
+  'Can you tell me about your house in detail?',
+  'What kind of furniture do you have in your room?',
+  'Which piece of furniture is your favorite Why?',
+  'Can you think of any memorable events that happened in your house?',
+  'Please tell me about your neighborhood.',
+  'Can you tell me about a memorable event that happened in your neighborhood?',
+  'Please tell me about your closest neighbors. What do you usually do with them?',
+  'Please tell me about your school. Where is it? What does it look like?',
+  'What kind of things do you usually do in school?',
+  'Tell me about a special event that took place at school, like a graduation ceremony or a school trip.',
+  'What is your major? Why did you choose it?',
+  'Tell me about some of the projects that you do in school.',
+  'What is the most memorable course you have taken at college?',
+];
