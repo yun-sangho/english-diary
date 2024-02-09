@@ -1,32 +1,12 @@
 'use client';
 
-import { CircularProgress, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import { Navigation } from '@/components/diary/Navigation';
 import { Memo } from '@/components/diary/Memo';
 import { useDiaryStore } from '@/store/useDiaryStore';
-import { useEffect, useState } from 'react';
 
-export default function SpeakingDiary({
-  params: { no },
-}: {
-  params: { no: string };
-}) {
-  const [init, setInit] = useState(false);
-
+export default function SpeakingDiary() {
   const store = useDiaryStore();
-
-  useEffect(() => {
-    store.setCurrentIdx(no);
-    setInit(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [no]);
-
-  if (!init)
-    return (
-      <Stack height={'100%'} justifyContent={'center'} alignItems={'center'}>
-        <CircularProgress />
-      </Stack>
-    );
 
   return (
     <Stack height={'100%'} justifyContent={'space-between'}>

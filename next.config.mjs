@@ -21,11 +21,6 @@ const nextConfig = {
         source: '/',
         destination: '/diary',
         permanent: true,
-      },
-      {
-        source: '/diary',
-        destination: '/diary/1',
-        permanent: true,
       }
     ];
   }

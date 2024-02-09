@@ -6,38 +6,33 @@ type DiaryStore = {
   currentIdx: number;
   setCurrentIdx: (idx: any) => void;
   getQuestion: () => string;
+  memos: Record<number, string>;
+  setMemo: (memo: string) => void;
+  getMemo: () => string;
 };
 
-export const useDiaryStore = create<DiaryStore>((set, get) => {
-  return {
-    currentIdx: 1,
-    setCurrentIdx: (idx) => {
-      idx = idx === '' ? 1 : parseInt(idx);
-      if (idx < 0 || idx >= DIARY_QUESTIONS.length) return;
-      set({ currentIdx: idx });
+export const useDiaryStore = create(
+  persist<DiaryStore>(
+    (set, get) => {
+      return {
+        currentIdx: 1,
+        memos: {},
+        setCurrentIdx: (idx) => {
+          idx = idx === '' ? 1 : parseInt(idx);
+          if (idx < 0 || idx >= DIARY_QUESTIONS.length) return;
+          set({ currentIdx: idx });
+        },
+        getQuestion: () => DIARY_QUESTIONS[get().currentIdx - 1],
+        setMemo: (memo: string) => {
+          set({ memos: { ...get().memos, [get().currentIdx]: memo } });
+        },
+        getMemo: () => {
+          return get().memos[get().currentIdx] || '';
+        },
+      };
     },
-    getQuestion: () => DIARY_QUESTIONS[get().currentIdx - 1],
-  };
-});
-
-type MemoStore = {
-  [idx: number]: string;
-  setMemo: (idx: number, memo: string) => void;
-  getMemo: (idx: number) => string;
-};
-
-export const useMemoStore = create(
-  persist<MemoStore>(
-    (set, get) => ({
-      setMemo: (idx: number, memo: string) => {
-        set({ [idx]: memo });
-      },
-      getMemo: (idx: number) => {
-        return get()[idx] || '';
-      },
-    }),
     {
-      name: 'memos',
+      name: 'diary-store',
     }
   )
 );
