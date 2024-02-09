@@ -3,6 +3,7 @@ import theme from '@/app/theme';
 import { Container, CssBaseline, ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ReactNode } from 'react';
+import { MenuBar } from '@/components/MenuBar';
 
 export const metadata: Metadata = {
   title: "Austin's English Speaking Diary",
@@ -36,6 +37,7 @@ export default function RootLayout({
                 p: 0,
               }}
             >
+              <MenuBar />
               <Container
                 fixed={true}
                 sx={{
