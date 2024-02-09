@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Austin's English Speaking Diary",
   description: 'A simple diary for practicing English speaking.',
   manifest: '/manifest.json',
+  icons: {
+    icon: '/icons/android/android-launchericon-144-144.png',
+  },
 };
 
 export default function RootLayout({
