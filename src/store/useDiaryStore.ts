@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { DIARY_QUESTIONS } from '@/questions';
+import { persist } from 'zustand/middleware';
 
 type DiaryStore = {
   currentIdx: number;
@@ -18,3 +19,25 @@ export const useDiaryStore = create<DiaryStore>((set, get) => {
     getQuestion: () => DIARY_QUESTIONS[get().currentIdx - 1],
   };
 });
+
+type MemoStore = {
+  [idx: number]: string;
+  setMemo: (idx: number, memo: string) => void;
+  getMemo: (idx: number) => string;
+};
+
+export const useMemoStore = create(
+  persist<MemoStore>(
+    (set, get) => ({
+      setMemo: (idx: number, memo: string) => {
+        set({ [idx]: memo });
+      },
+      getMemo: (idx: number) => {
+        return get()[idx] || '';
+      },
+    }),
+    {
+      name: 'memos',
+    }
+  )
+);

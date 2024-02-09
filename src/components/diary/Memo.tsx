@@ -2,13 +2,14 @@
 
 import { Button, FormControl, TextField, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useDiaryStore } from '@/store/useDiaryStore';
+import { useDiaryStore, useMemoStore } from '@/store/useDiaryStore';
 
 export function Memo() {
   const router = useRouter();
-  const [memo, setMemo] = useState('' as string);
   const store = useDiaryStore();
+  const memoStore = useMemoStore();
+
+  const memo = memoStore.getMemo(store.currentIdx);
 
   return (
     <form
@@ -25,10 +26,11 @@ export function Memo() {
         }}
       >
         <TextField
-          label={'Your response'}
+          value={memo}
+          label={'Memo'}
           multiline={true}
-          rows={5}
-          onChange={(e) => setMemo(e.target.value)}
+          rows={2}
+          onChange={(e) => memoStore.setMemo(store.currentIdx, e.target.value)}
         />
         <Button
           size={'medium'}

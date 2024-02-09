@@ -19,6 +19,7 @@ export default function SpeakingDiary({
   useEffect(() => {
     store.setCurrentIdx(no);
     setInit(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [no]);
 
   if (!init)
@@ -31,13 +32,13 @@ export default function SpeakingDiary({
   return (
     <Stack height={'100%'} justifyContent={'space-between'}>
       <Stack my={4} gap={1}>
-        <Stack height={130} overflow={'auto'}>
+        <Stack maxHeight={130} overflow={'auto'}>
           <Typography variant={'h5'} fontWeight={700}>
             {store.currentIdx}. {store.getQuestion()}
           </Typography>
         </Stack>
-        <Timer />
         <Memo />
+        <Timer />
       </Stack>
       <Stack gap={2}>
         <Navigation />
