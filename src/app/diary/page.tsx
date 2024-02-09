@@ -1,10 +1,12 @@
 'use client';
 
-import { CircularProgress, Stack, Typography } from '@mui/material';
+import { CircularProgress, Drawer, Stack, Typography } from '@mui/material';
 import { Navigation } from '@/components/diary/Navigation';
 import { Memo } from '@/components/diary/Memo';
 import { useDiaryStore } from '@/store/useDiaryStore';
 import { useEffect, useState } from 'react';
+import { useGlobalStore } from '@/store/useGlobalStore';
+import { QuestionList } from '@/components/diary/list/QuestionList';
 
 export default function SpeakingDiary() {
   const [init, setInit] = useState(false);
@@ -14,6 +16,7 @@ export default function SpeakingDiary() {
   }, []);
 
   const store = useDiaryStore();
+  const globalStore = useGlobalStore();
 
   if (!init)
     return (
@@ -41,6 +44,18 @@ export default function SpeakingDiary() {
       <Stack gap={2}>
         <Navigation />
       </Stack>
+      <Drawer
+        anchor={'bottom'}
+        open={globalStore.isQuestionListOpen}
+        onClose={() => globalStore.setIsQuestionListOpen(false)}
+        sx={{
+          '& .MuiDrawer-paper': {
+            borderRadius: '24px 24px 0 0',
+          },
+        }}
+      >
+        <QuestionList />
+      </Drawer>
     </Stack>
   );
 }

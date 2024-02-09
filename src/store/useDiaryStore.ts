@@ -19,7 +19,7 @@ export const useDiaryStore = create(
         memos: {},
         setCurrentIdx: (idx) => {
           idx = idx === '' ? 1 : parseInt(idx);
-          if (idx < 0 || idx >= DIARY_QUESTIONS.length) return;
+          if (idx < 0 || idx > DIARY_QUESTIONS.length) return;
           set({ currentIdx: idx });
         },
         getQuestion: () => DIARY_QUESTIONS[get().currentIdx - 1],
