@@ -21,13 +21,13 @@ export function Memo() {
       <FormControl
         fullWidth={true}
         sx={{
-          gap: 2,
+          gap: 1,
         }}
       >
         <TextField
           label={'Your response'}
           multiline={true}
-          rows={6}
+          rows={5}
           onChange={(e) => setMemo(e.target.value)}
         />
         <Button

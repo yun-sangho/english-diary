@@ -30,17 +30,16 @@ export default function SpeakingDiary({
 
   return (
     <Stack height={'100%'} justifyContent={'space-between'}>
-      <Stack my={4} overflow={'auto'}>
-        <Typography variant={'h5'} textAlign={'left'}>
-          {store.currentIdx}.
-        </Typography>
-        <Typography variant={'h5'} fontWeight={700}>
-          {store.getQuestion()}
-        </Typography>
-      </Stack>
-      <Stack gap={2}>
+      <Stack my={4} gap={1}>
+        <Stack height={130} overflow={'auto'}>
+          <Typography variant={'h5'} fontWeight={700}>
+            {store.currentIdx}. {store.getQuestion()}
+          </Typography>
+        </Stack>
         <Timer />
         <Memo />
+      </Stack>
+      <Stack gap={2}>
         <Navigation />
       </Stack>
     </Stack>
