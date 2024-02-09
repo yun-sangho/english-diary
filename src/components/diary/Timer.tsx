@@ -35,6 +35,7 @@ export function Timer() {
 
   return (
     <Button
+      fullWidth={true}
       variant='contained'
       size={'medium'}
       color={

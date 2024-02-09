@@ -1,7 +1,6 @@
 'use client';
 
-import { CircularProgress, Drawer, Stack, Typography } from '@mui/material';
-import { Timer } from '@/components/diary/Timer';
+import { CircularProgress, Stack, Typography } from '@mui/material';
 import { Navigation } from '@/components/diary/Navigation';
 import { Memo } from '@/components/diary/Memo';
 import { useDiaryStore } from '@/store/useDiaryStore';
@@ -32,10 +31,9 @@ export default function SpeakingDiary({
   return (
     <Stack height={'100%'} justifyContent={'space-between'}>
       <Stack my={2} gap={2}>
-        <Timer />
         <Stack maxHeight={130} overflow={'auto'}>
           <Typography
-            fontSize={20}
+            fontSize={18}
             fontWeight={600}
             sx={{
               lineHeight: 1.2,
@@ -44,13 +42,11 @@ export default function SpeakingDiary({
             {store.currentIdx}. {store.getQuestion()}
           </Typography>
         </Stack>
-
         <Memo />
       </Stack>
       <Stack gap={2}>
         <Navigation />
       </Stack>
-      {/*<Drawer anchor={'bottom'} open={true}></Drawer>*/}
     </Stack>
   );
 }
