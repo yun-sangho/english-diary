@@ -1,0 +1,19 @@
+{
+  "id": "any_id",
+  "name": "Austin's English Diary",
+  "short_name": "Speaking Diary",
+  "description": "Speaking Diary for Coach Park English",
+  "icons": [
+    {
+      "src": "./next.svg",
+      "sizes": "72x72",
+      "type": "image/svg"
+    }
+  ],
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "start_url": "/",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait"
+}

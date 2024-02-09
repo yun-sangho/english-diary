@@ -7,6 +7,7 @@ import { ReactNode } from 'react';
 export const metadata: Metadata = {
   title: "Austin's English Speaking Diary",
   description: 'A simple diary for practicing English speaking.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
