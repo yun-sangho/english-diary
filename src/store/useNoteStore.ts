@@ -12,6 +12,7 @@ type NoteStore = {
   savedWords: string[];
   addWord: (word: string) => void;
   getAllWords: () => { korean: string; english: string; addAt: number }[];
+  addEnglish: (word: string, english: string) => void;
 };
 
 export const useNoteStore = create(
@@ -34,6 +35,14 @@ export const useNoteStore = create(
           notes[word] = {
             english: '',
             addAt: Date.now(),
+          };
+          set({ notes });
+        },
+        addEnglish: (word: string, english: string) => {
+          const notes = get().notes;
+          notes[word] = {
+            ...notes[word],
+            english,
           };
           set({ notes });
         },

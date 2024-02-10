@@ -1,39 +1,27 @@
-import { ListItem, Typography } from '@mui/material';
-import { useGlobalStore } from '@/store/useGlobalStore';
-import { useDiaryStore } from '@/store/useDiaryStore';
+import { ListItem, TextField, Typography } from '@mui/material';
 import React, { forwardRef } from 'react';
+import { useNoteStore } from '@/store/useNoteStore';
 
 type ItemProps = {
-  idx: number;
-  question: string;
+  korean: string;
+  english: string;
 };
 
 // eslint-disable-next-line react/display-name
-export const Item = forwardRef(({ idx, question }: ItemProps, ref: any) => {
-  const globalStore = useGlobalStore();
-  const diaryStore = useDiaryStore();
-
-  const hasMemo = !!diaryStore.memos[idx];
+export const Item = forwardRef(({ korean, english }: ItemProps, ref: any) => {
+  const noteStore = useNoteStore();
 
   return (
     <ListItem
-      onClick={() => {
-        diaryStore.setCurrentIdx(idx);
-        globalStore.setIsQuestionListOpen(false);
-      }}
       sx={{
         display: 'flex',
         alignItems: 'center',
-        gap: 1,
-        height: 52,
-        px: 2,
+        justifyContent: 'space-between',
+        px: 0,
+        py: 1.5,
       }}
       ref={ref}
     >
-      {hasMemo && <Typography fontSize={18}>✅</Typography>}
-      {diaryStore.currentIdx === idx && (
-        <Typography fontSize={18}>👉</Typography>
-      )}
       <Typography
         fontSize={16}
         sx={{
@@ -43,8 +31,17 @@ export const Item = forwardRef(({ idx, question }: ItemProps, ref: any) => {
           textOverflow: 'ellipsis',
         }}
       >
-        {idx}. {question}
+        {korean}
       </Typography>
+      <TextField
+        size={'small'}
+        value={english}
+        onChange={(e) => noteStore.addEnglish(korean, e.target.value)}
+        sx={{
+          flexGrow: 1,
+          maxWidth: 200,
+        }}
+      />
     </ListItem>
   );
 });

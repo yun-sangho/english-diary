@@ -2,7 +2,7 @@
 
 import { CircularProgress, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useNoteStore } from '@/store/useNoteStore';
+import { WordList } from '@/components/notes/list/WordList';
 
 export default function SpeakingDiary() {
   const [init, setInit] = useState(false);
@@ -10,8 +10,6 @@ export default function SpeakingDiary() {
   useEffect(() => {
     setInit(true);
   }, []);
-
-  const store = useNoteStore();
 
   if (!init)
     return (
@@ -22,9 +20,7 @@ export default function SpeakingDiary() {
 
   return (
     <Stack height={'100%'} overflow={'auto'}>
-      <Stack my={2} gap={2}>
-        Notes
-      </Stack>
+      <WordList></WordList>
     </Stack>
   );
 }
