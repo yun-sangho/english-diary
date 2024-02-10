@@ -27,7 +27,7 @@ export default function SpeakingDiary() {
 
   return (
     <Stack height={'100%'} justifyContent={'space-between'}>
-      <Stack my={2} gap={2}>
+      <Stack my={2} gap={1}>
         <Stack maxHeight={130} overflow={'auto'}>
           <Typography
             fontSize={20}
@@ -41,9 +41,7 @@ export default function SpeakingDiary() {
         </Stack>
         <Memo />
       </Stack>
-      <Stack gap={2}>
-        <Navigation />
-      </Stack>
+      <Navigation />
       <Drawer
         anchor={'bottom'}
         open={globalStore.isQuestionListOpen}

@@ -25,7 +25,7 @@ export function QuestionList() {
   useEffect(() => {
     if (currentItemRef.current) {
       currentItemRef.current.scrollIntoView({
-        behavior: 'smooth',
+        behavior: 'auto',
         block: 'center',
       });
     }
