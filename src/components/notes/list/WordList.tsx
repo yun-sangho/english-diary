@@ -1,4 +1,4 @@
-import { Box, Divider, List, Stack, Typography } from '@mui/material';
+import { Box, Divider, List, Stack } from '@mui/material';
 
 import { useNoteStore } from '@/store/useNoteStore';
 import { Item } from '@/components/notes/list/Item';
