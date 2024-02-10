@@ -34,7 +34,7 @@ export function Navigation() {
           size={'small'}
           sx={{ width: '30%' }}
           onClick={() => store.setCurrentIdx(store.currentIdx + 1)}
-          disabled={store.currentIdx === DIARY_QUESTIONS.length - 1}
+          disabled={store.currentIdx === DIARY_QUESTIONS.length}
         >
           <ArrowForwardIos fontSize='inherit' />
         </IconButton>

@@ -1,10 +1,26 @@
 'use client';
 
-import { AppBar, Toolbar } from '@mui/material';
+import {
+  AppBar,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  styled,
+  Toolbar,
+} from '@mui/material';
 import { Search } from '@/components/nav/Search';
-import { AddNoteButton } from '@/components/nav/AddNoteButton';
+import { ChevronLeft, Menu } from '@mui/icons-material';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function TopBar() {
+  const router = useRouter();
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   return (
     <AppBar position='static'>
       <Toolbar
@@ -16,9 +32,85 @@ export function TopBar() {
           gap: 1,
         }}
       >
+        <IconButton
+          size='large'
+          edge='start'
+          color='inherit'
+          aria-label='menu'
+          onClick={() => setIsDrawerOpen(true)}
+        >
+          <Menu />
+        </IconButton>
         <Search />
-        <AddNoteButton />
       </Toolbar>
+      <Drawer
+        sx={{
+          width: 120,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: 120,
+            boxSizing: 'border-box',
+          },
+        }}
+        anchor={'left'}
+        open={isDrawerOpen}
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        <DrawerHeader>
+          <IconButton onClick={() => setIsDrawerOpen(false)}>
+            <ChevronLeft />
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
+        <List
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <ListItem
+            disablePadding={true}
+            onClick={() => {
+              router.push('/diary');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <ListItemButton>
+              <ListItemText
+                primary={'Diary'}
+                sx={{
+                  textAlign: 'center',
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+          <ListItem
+            disablePadding={true}
+            onClick={() => {
+              router.push('/notes');
+              setIsDrawerOpen(false);
+            }}
+          >
+            <ListItemButton>
+              <ListItemText
+                primary={'Notes'}
+                sx={{
+                  textAlign: 'center',
+                }}
+              />
+            </ListItemButton>
+          </ListItem>
+        </List>
+      </Drawer>
     </AppBar>
   );
 }
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(0, 1),
+  // necessary for content to be below app bar
+  ...theme.mixins.toolbar,
+  justifyContent: 'flex-end',
+}));
