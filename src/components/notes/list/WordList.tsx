@@ -20,6 +20,16 @@ export function WordList() {
         behavior: 'auto',
         block: 'center',
       });
+
+      currentItemRef.current.style.backgroundColor = '#e3f2fd';
+
+      const timeout = setTimeout(() => {
+        currentItemRef.current.style.backgroundColor = 'white';
+      }, 1000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }
   }, [targetWord]);
 

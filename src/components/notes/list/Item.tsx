@@ -27,22 +27,6 @@ export const Item = forwardRef(({ korean, english }: ItemProps, ref: any) => {
     }
   }, [isEditing]);
 
-  const [highlight, setHighlight] = React.useState(false);
-
-  useEffect(() => {
-    let timeout: any;
-    if (ref) {
-      ref.current.style.backgroundColor = '#e3f2fd';
-      timeout = setTimeout(() => {
-        ref.current.style.backgroundColor = 'white';
-      }, 1000);
-    }
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [ref]);
-
   const noteStore = useNoteStore();
   const isSaved = false;
 

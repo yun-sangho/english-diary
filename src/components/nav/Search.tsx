@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useNoteStore } from '@/store/useNoteStore';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const NO_WORDS = 'NO_WORDS';
@@ -30,24 +30,21 @@ export function Search() {
 
   return (
     <Autocomplete
-      open={isOpened}
-      onOpen={() => setIsOpened(true)}
-      onBlur={() => setIsOpened(false)}
       value={null}
+      blurOnSelect={true}
       inputValue={textInput}
       sx={{
         flexGrow: 1,
         maxWidth: 400,
       }}
       renderOption={(props, option) => {
-        const { children, ...rest } = props;
         if (option.id === NO_WORDS) {
           return (
             <li
-              {...rest}
+              {...props}
               key={props.id}
               onClick={(event) => {
-                event.preventDefault();
+                props.onClick!(event);
                 noteStore.addWord(textInput);
                 setTextInput('');
               }}
@@ -61,11 +58,11 @@ export function Search() {
 
         return (
           <li
-            {...rest}
+            {...props}
             key={props.id}
-            onClick={() => {
+            onClick={(e) => {
+              props.onClick!(e);
               router.push(`/notes?word=${option.korean}`);
-              setIsOpened(false);
             }}
           >
             <Stack
