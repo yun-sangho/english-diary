@@ -15,15 +15,7 @@ const withPWA = pwa({
 
 
 const nextConfig = {
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/diary',
-        permanent: true,
-      }
-    ];
-  }
+  output: "export"
 };
 
 export default withPWA(nextConfig);
