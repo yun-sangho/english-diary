@@ -1,9 +1,16 @@
-import { Container, Typography } from '@mui/material';
+'use client';
+
+import { Page, useGlobalStore } from '@/store/useGlobalStore';
+import { SpeakingDiary } from '@/app/pages/SpeakingDiary';
+import { WordNotes } from '@/app/pages/WordNotes';
 
 export default function Home() {
-  return (
-    <Container>
-      <Typography>Home</Typography>
-    </Container>
-  );
+  const globalStore = useGlobalStore();
+
+  switch (globalStore.currentPage) {
+    case Page.Notes:
+      return <WordNotes />;
+    default:
+      return <SpeakingDiary />;
+  }
 }

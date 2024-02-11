@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useGlobalStore } from '@/store/useGlobalStore';
 import { QuestionList } from '@/components/diary/list/QuestionList';
 
-export default function SpeakingDiary() {
+export function SpeakingDiary() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {

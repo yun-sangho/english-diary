@@ -4,7 +4,7 @@ import { CircularProgress, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { WordList } from '@/components/notes/list/WordList';
 
-export default function SpeakingDiary() {
+export function WordNotes() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {

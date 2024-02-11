@@ -3,14 +3,11 @@ import { Box, Divider, List } from '@mui/material';
 import { useNoteStore } from '@/store/useNoteStore';
 import { Item } from '@/components/notes/list/Item';
 import { useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 
 export function WordList() {
   const notes = useNoteStore();
   const words = notes.getAllWords();
-
-  const searchParams = useSearchParams();
-  const targetWord = searchParams.get('word');
+  const targetWord = notes.focusWord;
 
   const currentItemRef = useRef<any>();
 

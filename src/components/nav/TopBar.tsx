@@ -15,11 +15,11 @@ import {
 import { Search } from '@/components/nav/Search';
 import { ChevronLeft, Menu } from '@mui/icons-material';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Page, useGlobalStore } from '@/store/useGlobalStore';
 
 export function TopBar() {
-  const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const globalStore = useGlobalStore();
 
   return (
     <AppBar position='static'>
@@ -71,7 +71,7 @@ export function TopBar() {
           <ListItem
             disablePadding={true}
             onClick={() => {
-              router.push('/diary');
+              globalStore.setCurrentPage(Page.Diary);
               setIsDrawerOpen(false);
             }}
           >
@@ -87,7 +87,7 @@ export function TopBar() {
           <ListItem
             disablePadding={true}
             onClick={() => {
-              router.push('/notes');
+              globalStore.setCurrentPage(Page.Notes);
               setIsDrawerOpen(false);
             }}
           >

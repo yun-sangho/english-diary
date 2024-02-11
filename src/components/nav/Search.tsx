@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { useNoteStore } from '@/store/useNoteStore';
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Page, useGlobalStore } from '@/store/useGlobalStore';
 
 const NO_WORDS = 'NO_WORDS';
 
@@ -23,6 +23,7 @@ export function Search() {
 
   const [textInput, setTextInput] = useState('');
 
+  const globalStore = useGlobalStore();
   const noteStore = useNoteStore();
 
   const options = noteStore.getAllWords().map((word) => ({
@@ -30,8 +31,6 @@ export function Search() {
     english: word.english,
     id: word.korean,
   }));
-
-  const router = useRouter();
 
   useEffect(() => {
     if (snackBarMessage === '') return;
@@ -74,7 +73,8 @@ export function Search() {
               key={props.id}
               onClick={(e) => {
                 props.onClick!(e);
-                router.push(`/notes?word=${option.korean}`);
+                noteStore.setFocusWord(option.korean);
+                globalStore.setCurrentPage(Page.Notes);
               }}
             >
               <Stack
@@ -83,7 +83,7 @@ export function Search() {
                 alignItems={'center'}
                 width={'100%'}
               >
-                {noteStore.savedWords.includes(option.korean) && (
+                {noteStore.saveWords.includes(option.korean) && (
                   <Typography>🔥</Typography>
                 )}
                 <Typography
@@ -150,7 +150,8 @@ export function Search() {
           action={
             <Button
               onClick={() => {
-                router.push(`/notes?word=${snackBarMessage}`);
+                noteStore.setFocusWord(snackBarMessage);
+                globalStore.setCurrentPage(Page.Notes);
                 setShowSnackBar(false);
               }}
             >

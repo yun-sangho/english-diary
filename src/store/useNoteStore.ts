@@ -9,7 +9,9 @@ type NoteStore = {
       addAt: number;
     }
   >;
-  savedWords: string[];
+  saveWords: string[];
+  focusWord: string;
+  setFocusWord: (word: string) => void;
   addWord: (word: string) => void;
   getAllWords: () => { korean: string; english: string; addAt: number }[];
   addEnglish: (word: string, english: string) => void;
@@ -22,7 +24,11 @@ export const useNoteStore = create(
     (set, get) => {
       return {
         notes: {},
-        savedWords: [],
+        saveWords: [],
+        focusWord: '',
+        setFocusWord: (word) => {
+          set({ focusWord: word });
+        },
         getAllWords: () => {
           return Object.entries(get().notes)
             .map(([key, value]) => ({
