@@ -22,6 +22,7 @@ export function WordList() {
 
       const timeout = setTimeout(() => {
         currentItemRef.current.style.backgroundColor = 'white';
+        notes.setFocusWord('');
       }, 1000);
 
       return () => {

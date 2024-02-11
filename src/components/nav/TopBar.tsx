@@ -68,38 +68,34 @@ export function TopBar() {
             flexDirection: 'column',
           }}
         >
-          <ListItem
-            disablePadding={true}
+          <ListItemButton
             onClick={() => {
               globalStore.setCurrentPage(Page.Diary);
               setIsDrawerOpen(false);
             }}
+            selected={globalStore.currentPage === Page.Diary}
           >
-            <ListItemButton>
-              <ListItemText
-                primary={'Diary'}
-                sx={{
-                  textAlign: 'center',
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
-          <ListItem
-            disablePadding={true}
+            <ListItemText
+              primary={'Diary'}
+              sx={{
+                textAlign: 'center',
+              }}
+            />
+          </ListItemButton>
+          <ListItemButton
             onClick={() => {
               globalStore.setCurrentPage(Page.Notes);
               setIsDrawerOpen(false);
             }}
+            selected={globalStore.currentPage === Page.Notes}
           >
-            <ListItemButton>
-              <ListItemText
-                primary={'Notes'}
-                sx={{
-                  textAlign: 'center',
-                }}
-              />
-            </ListItemButton>
-          </ListItem>
+            <ListItemText
+              primary={'Notes'}
+              sx={{
+                textAlign: 'center',
+              }}
+            />
+          </ListItemButton>
         </List>
       </Drawer>
     </AppBar>
