@@ -18,20 +18,33 @@ type ItemProps = {
 // eslint-disable-next-line react/display-name
 export const Item = forwardRef(({ korean, english }: ItemProps, ref: any) => {
   const [isEditing, setIsEditing] = React.useState(false);
-
   const [editedKorean, setEditedKorean] = React.useState(korean);
   const [editedEnglish, setEditedEnglish] = React.useState(english);
-
-  const noteStore = useNoteStore();
-  const isSaved = false;
-
   const editRef = useRef<any>();
-
   useEffect(() => {
     if (isEditing && editRef.current) {
       editRef.current.focus();
     }
   }, [isEditing]);
+
+  const [highlight, setHighlight] = React.useState(false);
+
+  useEffect(() => {
+    let timeout: any;
+    if (ref) {
+      ref.current.style.backgroundColor = '#e3f2fd';
+      timeout = setTimeout(() => {
+        ref.current.style.backgroundColor = 'white';
+      }, 1000);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [ref]);
+
+  const noteStore = useNoteStore();
+  const isSaved = false;
 
   return (
     <>

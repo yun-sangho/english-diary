@@ -11,10 +11,12 @@ import {
 } from '@mui/material';
 import { useNoteStore } from '@/store/useNoteStore';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const NO_WORDS = 'NO_WORDS';
 
 export function Search() {
+  const [isOpened, setIsOpened] = useState(false);
   const [textInput, setTextInput] = useState('');
   const noteStore = useNoteStore();
 
@@ -24,8 +26,13 @@ export function Search() {
     id: word.korean,
   }));
 
+  const router = useRouter();
+
   return (
     <Autocomplete
+      open={isOpened}
+      onOpen={() => setIsOpened(true)}
+      onBlur={() => setIsOpened(false)}
       value={null}
       inputValue={textInput}
       sx={{
@@ -53,13 +60,45 @@ export function Search() {
         }
 
         return (
-          <li {...rest} key={props.id}>
-            <Stack direction={'row'} gap={1}>
+          <li
+            {...rest}
+            key={props.id}
+            onClick={() => {
+              router.push(`/notes?word=${option.korean}`);
+              setIsOpened(false);
+            }}
+          >
+            <Stack
+              direction={'row'}
+              gap={1}
+              alignItems={'center'}
+              width={'100%'}
+            >
               {noteStore.savedWords.includes(option.korean) && (
                 <Typography>🔥</Typography>
               )}
-              <Typography>{option.korean}</Typography>
-              <Typography variant={'caption'}>{option.english}</Typography>
+              <Typography
+                sx={{
+                  flexShrink: 1,
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflowX: 'hidden',
+                }}
+              >
+                {option.korean}
+              </Typography>
+              <Typography
+                fontSize={15}
+                color={'grey.600'}
+                sx={{
+                  flexShrink: 0.5,
+                  whiteSpace: 'nowrap',
+                  textOverflow: 'ellipsis',
+                  overflowX: 'hidden',
+                }}
+              >
+                {option.english}
+              </Typography>
             </Stack>
           </li>
         );

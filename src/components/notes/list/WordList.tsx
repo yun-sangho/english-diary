@@ -1,20 +1,39 @@
-import { Box, Divider, List, Stack } from '@mui/material';
+import { Box, Divider, List } from '@mui/material';
 
 import { useNoteStore } from '@/store/useNoteStore';
 import { Item } from '@/components/notes/list/Item';
+import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export function WordList() {
   const notes = useNoteStore();
   const words = notes.getAllWords();
 
+  const searchParams = useSearchParams();
+  const targetWord = searchParams.get('word');
+
+  const currentItemRef = useRef<any>();
+
+  useEffect(() => {
+    if (targetWord && currentItemRef.current) {
+      currentItemRef.current.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+      });
+    }
+  }, [targetWord]);
+
   return (
     <List>
-      {words.map((word, i) => (
-        <Box key={i}>
-          <Item korean={word.korean} english={word.english} />
-          <Divider />
-        </Box>
-      ))}
+      {words.map((word, i) => {
+        const ref = targetWord === word.korean ? currentItemRef : null;
+        return (
+          <Box key={i}>
+            <Item korean={word.korean} english={word.english} ref={ref} />
+            <Divider />
+          </Box>
+        );
+      })}
     </List>
   );
 }
