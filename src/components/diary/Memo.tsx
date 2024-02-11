@@ -13,18 +13,18 @@ import { useEffect, useState } from 'react';
 
 export function Memo() {
   const [memo, setMemo] = useState('');
-
   const store = useDiaryStore();
-  const currentMemo = store.getMemo();
+
   useEffect(() => {
-    setMemo(currentMemo);
-  }, [currentMemo]);
+    setMemo(store.getMemo());
+  }, [store]);
 
   return (
     <form
       autoComplete={'off'}
       onSubmit={(e) => {
         e.preventDefault();
+        store.setMemo(memo);
         store.setCurrentIdx(store.currentIdx + 1);
       }}
     >
@@ -46,7 +46,7 @@ export function Memo() {
           <Button
             size={'medium'}
             variant={'outlined'}
-            disabled={memo === currentMemo}
+            disabled={memo === store.getMemo()}
             type={'submit'}
             fullWidth={true}
           >
