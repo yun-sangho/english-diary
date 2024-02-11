@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@mui/material';
 import { Timer as T } from '@mui/icons-material';
+import { useDiaryStore } from '@/store/useDiaryStore';
 
 enum TimerState {
   Running,
@@ -14,8 +15,12 @@ export function Timer() {
   const [state, setState] = useState(TimerState.Stopped);
   const [time, setTime] = useState(INITIAL_TIME);
 
-  const interval = useRef<any>();
+  const diaryStore = useDiaryStore();
+  useEffect(() => {
+    setState(TimerState.Stopped);
+  }, [diaryStore.currentIdx]);
 
+  const interval = useRef<any>();
   useEffect(() => {
     if (state === TimerState.Running) {
       interval.current = setInterval(() => {
@@ -23,13 +28,15 @@ export function Timer() {
       }, 1000);
 
       return () => clearInterval(interval.current);
+    } else if (state === TimerState.Stopped) {
+      clearInterval(interval.current);
+      setTime(INITIAL_TIME);
     }
   }, [state]);
 
   useEffect(() => {
     if (time === 0) {
       setState(TimerState.Stopped);
-      setTime(INITIAL_TIME);
     }
   }, [time]);
 
