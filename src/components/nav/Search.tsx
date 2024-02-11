@@ -142,7 +142,7 @@ export function Search() {
       <Snackbar
         open={showSnackBar}
         onClose={() => setShowSnackBar(false)}
-        autoHideDuration={2000}
+        autoHideDuration={5000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       >
         <SnackbarContent
