@@ -33,6 +33,7 @@ export const useDiaryStore = create(
     },
     {
       name: 'diary-store',
+      version: 1,
     }
   )
 );

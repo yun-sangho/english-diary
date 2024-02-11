@@ -70,6 +70,7 @@ export const useNoteStore = create(
     },
     {
       name: 'note-store',
+      version: 1,
     }
   )
 );

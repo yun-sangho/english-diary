@@ -23,6 +23,7 @@ export const useGlobalStore = create(
     }),
     {
       name: 'global-store',
+      version: 1,
     }
   )
 );
