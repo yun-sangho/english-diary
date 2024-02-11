@@ -13,6 +13,8 @@ type NoteStore = {
   addWord: (word: string) => void;
   getAllWords: () => { korean: string; english: string; addAt: number }[];
   addEnglish: (word: string, english: string) => void;
+  editWord: (target: string, word: string) => void;
+  deleteWord: (word: string) => void;
 };
 
 export const useNoteStore = create(
@@ -44,6 +46,18 @@ export const useNoteStore = create(
             ...notes[word],
             english,
           };
+          set({ notes });
+        },
+        editWord: (target, word) => {
+          const notes = get().notes;
+          const w = notes[target];
+          delete notes[target];
+          notes[word] = w;
+          set({ notes });
+        },
+        deleteWord: (word) => {
+          const notes = get().notes;
+          delete notes[word];
           set({ notes });
         },
       };

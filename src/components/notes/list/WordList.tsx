@@ -8,8 +8,17 @@ export function WordList() {
   const words = notes.getAllWords();
 
   return (
-    <Stack>
-      <List>
+    <Stack
+      sx={{
+        height: '100%',
+      }}
+    >
+      <List
+        sx={{
+          overflow: 'auto',
+          height: '100%',
+        }}
+      >
         {words.map((word, i) => (
           <Box key={i}>
             <Item korean={word.korean} english={word.english} />

@@ -41,7 +41,7 @@ export default function RootLayout({
               <Container
                 fixed={true}
                 sx={{
-                  height: '100%',
+                  height: 'calc(100% - 56px)',
                   maxHeight: 1200,
                 }}
               >

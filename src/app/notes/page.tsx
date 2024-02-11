@@ -19,8 +19,8 @@ export default function SpeakingDiary() {
     );
 
   return (
-    <Stack height={'100%'} overflow={'auto'}>
-      <WordList></WordList>
+    <Stack height={'100%'}>
+      <WordList />
     </Stack>
   );
 }
