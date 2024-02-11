@@ -19,7 +19,7 @@ export default function SpeakingDiary() {
     );
 
   return (
-    <Stack height={'100%'}>
+    <Stack>
       <WordList />
     </Stack>
   );

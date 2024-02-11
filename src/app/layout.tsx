@@ -43,6 +43,7 @@ export default function RootLayout({
                 sx={{
                   height: 'calc(100% - 56px)',
                   maxHeight: 1200,
+                  overflowY: 'auto',
                 }}
               >
                 {children}
