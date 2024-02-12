@@ -33,7 +33,7 @@ export default function RootLayout({
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: '100dvh',
+                height: '100vh',
                 p: 0,
               }}
             >
@@ -42,7 +42,7 @@ export default function RootLayout({
                 fixed={true}
                 sx={{
                   marginTop: 7,
-                  height: 'calc(100%)',
+                  height: 'calc(100vh - 56px)',
                   maxHeight: 1200,
                   overflowY: 'auto',
                 }}
