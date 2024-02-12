@@ -20,7 +20,7 @@ export function SpeakingDiary() {
 
   if (!init)
     return (
-      <Stack height={'100%'} justifyContent={'center'} alignItems={'center'}>
+      <Stack height={'100vh'} justifyContent={'center'} alignItems={'center'}>
         <CircularProgress />
       </Stack>
     );

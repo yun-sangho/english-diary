@@ -143,11 +143,14 @@ export function Search() {
       />
       <Snackbar
         open={showSnackBar}
-        onClose={() => setShowSnackBar(false)}
+        onClose={(_, reason) => {
+          if (reason === 'clickaway') return;
+          setShowSnackBar(false);
+        }}
         autoHideDuration={5000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         sx={{
-          bottom: globalStore.currentPage === Page.Notes ? 8 : 64,
+          bottom: globalStore.currentPage === Page.Notes ? 16 : 64,
         }}
       >
         <SnackbarContent
