@@ -1,6 +1,6 @@
 'use client';
 
-import { ButtonGroup, IconButton } from '@mui/material';
+import { AppBar, ButtonGroup, IconButton } from '@mui/material';
 import { ArrowForwardIos } from '@mui/icons-material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -13,7 +13,14 @@ export function Navigation() {
   const store = useDiaryStore();
 
   return (
-    <>
+    <AppBar
+      position={'fixed'}
+      color={'transparent'}
+      sx={{
+        top: 'auto',
+        bottom: 0,
+      }}
+    >
       <ButtonGroup>
         <IconButton
           size={'small'}
@@ -39,6 +46,6 @@ export function Navigation() {
           <ArrowForwardIos fontSize='inherit' />
         </IconButton>
       </ButtonGroup>
-    </>
+    </AppBar>
   );
 }

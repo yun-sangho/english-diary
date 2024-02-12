@@ -29,11 +29,6 @@ export default function RootLayout({
               maxWidth={'sm'}
               component={'main'}
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                height: '100vh',
                 p: 0,
               }}
             >
@@ -41,10 +36,7 @@ export default function RootLayout({
               <Container
                 fixed={true}
                 sx={{
-                  marginTop: 7,
-                  height: 'calc(100vh - 56px)',
-                  maxHeight: 1200,
-                  overflowY: 'auto',
+                  my: 7,
                 }}
               >
                 {children}

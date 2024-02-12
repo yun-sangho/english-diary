@@ -26,7 +26,7 @@ export function SpeakingDiary() {
     );
 
   return (
-    <Stack height={'100%'} justifyContent={'space-between'}>
+    <Stack>
       <Stack my={2} gap={1}>
         <Stack maxHeight={130} overflow={'auto'}>
           <Typography
