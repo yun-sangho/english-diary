@@ -146,6 +146,9 @@ export function Search() {
         onClose={() => setShowSnackBar(false)}
         autoHideDuration={5000}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        sx={{
+          bottom: globalStore.currentPage === Page.Notes ? 8 : 64,
+        }}
       >
         <SnackbarContent
           message={`"🎉${snackBarMessage}" added!`}
