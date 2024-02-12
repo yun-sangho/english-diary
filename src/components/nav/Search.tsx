@@ -122,10 +122,12 @@ export function Search() {
               option.english.toLowerCase().includes(input)
           );
 
-          if (!result.length)
-            return [{ korean: NO_WORDS, english: '', id: NO_WORDS }];
+          const exactMatch = result.find(
+            (option) => option.korean.toLowerCase() === input
+          );
+          if (exactMatch) return result;
 
-          return result;
+          return [...result, { korean: NO_WORDS, english: '', id: NO_WORDS }];
         }}
         getOptionLabel={(option) => option.korean}
         options={options}
