@@ -34,8 +34,7 @@ export function QuestionList() {
   return (
     <Stack
       sx={{
-        py: 3,
-        pb: 5,
+        pt: 3,
         gap: 2,
       }}
     >
