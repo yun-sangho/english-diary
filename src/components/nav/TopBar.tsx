@@ -22,7 +22,7 @@ export function TopBar() {
   const globalStore = useGlobalStore();
 
   return (
-    <AppBar position='static'>
+    <AppBar position='fixed'>
       <Toolbar
         sx={{
           width: '100%',

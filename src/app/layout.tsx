@@ -41,7 +41,8 @@ export default function RootLayout({
               <Container
                 fixed={true}
                 sx={{
-                  height: 'calc(100% - 56px)',
+                  marginTop: 7,
+                  height: 'calc(100%)',
                   maxHeight: 1200,
                   overflowY: 'auto',
                 }}
