@@ -38,7 +38,7 @@ export function Memo() {
           value={memo}
           label={'Memo'}
           multiline={true}
-          rows={2}
+          rows={4}
           onChange={(e) => setMemo(e.target.value)}
         />
         <Stack direction={'row'} gap={1}>

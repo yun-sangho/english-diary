@@ -30,7 +30,7 @@ export function SpeakingDiary() {
       <Stack my={2} gap={1}>
         <Stack maxHeight={130} overflow={'auto'}>
           <Typography
-            fontSize={20}
+            fontSize={18}
             fontWeight={600}
             sx={{
               lineHeight: 1.2,
