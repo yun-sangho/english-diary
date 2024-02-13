@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import theme from '@/app/theme';
-import { Container, CssBaseline, ThemeProvider } from '@mui/material';
+import { Box, Container, CssBaseline, Fab, ThemeProvider } from '@mui/material';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { ReactNode } from 'react';
 import { TopBar } from '@/components/nav/TopBar';
+import { ScrollTop } from '@/components/ScrollTop';
+import { KeyboardArrowUp } from '@mui/icons-material';
 
 export const metadata: Metadata = {
   title: "Austin's English Speaking Diary",
@@ -32,16 +34,22 @@ export default function RootLayout({
                 p: 0,
               }}
             >
+              <Box id='back-to-top-anchor' />
               <TopBar />
               <Container
                 fixed={true}
                 sx={{
-                  my: 7,
+                  mt: 7,
                 }}
               >
                 {children}
               </Container>
             </Container>
+            <ScrollTop>
+              <Fab size={'small'}>
+                <KeyboardArrowUp />
+              </Fab>
+            </ScrollTop>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

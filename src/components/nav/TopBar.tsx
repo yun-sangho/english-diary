@@ -39,7 +39,11 @@ export function TopBar() {
 
   return (
     <HideOnScroll>
-      <AppBar>
+      <AppBar
+        sx={{
+          boxShadow: 0,
+        }}
+      >
         <Toolbar
           sx={{
             width: '100%',
