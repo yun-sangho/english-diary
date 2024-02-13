@@ -1,6 +1,12 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+export enum NotesFilter {
+  All,
+  Saved,
+  Unsaved,
+}
+
 type NoteStore = {
   notes: Record<
     string,
@@ -24,6 +30,8 @@ type NoteStore = {
   deleteWord: (word: string) => void;
   addSaveWord: (word: string) => void;
   removeSaveWord: (word: string) => void;
+  filter: NotesFilter;
+  setFilter: (filter: NotesFilter) => void;
 };
 
 export const useNoteStore = create(
@@ -32,6 +40,10 @@ export const useNoteStore = create(
       return {
         notes: {},
         saveWords: [],
+        filter: NotesFilter.All,
+        setFilter: (filter) => {
+          set({ filter });
+        },
         addSaveWord: (word) => {
           const saveWords = get().saveWords;
           if (!saveWords.includes(word)) {

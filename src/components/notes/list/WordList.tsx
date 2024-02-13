@@ -1,13 +1,14 @@
-import { Box, Divider, List } from '@mui/material';
+import { Box, Chip, Divider, List, Stack } from '@mui/material';
 
-import { useNoteStore } from '@/store/useNoteStore';
+import { NotesFilter, useNoteStore } from '@/store/useNoteStore';
 import { Item } from '@/components/notes/list/Item';
 import { useEffect, useRef } from 'react';
 
 export function WordList() {
-  const notes = useNoteStore();
-  const words = notes.getAllWords();
-  const targetWord = notes.focusWord;
+  const noteStore = useNoteStore();
+  const words = noteStore.getAllWords();
+
+  const targetWord = noteStore.focusWord;
 
   const currentItemRef = useRef<any>();
 
@@ -22,31 +23,57 @@ export function WordList() {
 
       const timeout = setTimeout(() => {
         currentItemRef.current.style.backgroundColor = 'white';
-        notes.setFocusWord('');
+        noteStore.setFocusWord('');
       }, 1000);
 
       return () => {
         clearTimeout(timeout);
       };
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetWord]);
 
+  const filteredWords = words.filter((word) => {
+    if (noteStore.filter === NotesFilter.All) return true;
+    if (noteStore.filter === NotesFilter.Saved) return word.saved;
+    if (noteStore.filter === NotesFilter.Unsaved) return !word.saved;
+    return true;
+  });
+
   return (
-    <List>
-      {words.map((word, i) => {
-        const ref = targetWord === word.korean ? currentItemRef : null;
-        return (
-          <Box key={i}>
-            <Item
-              korean={word.korean}
-              english={word.english}
-              ref={ref}
-              saved={word.saved}
-            />
-            <Divider />
-          </Box>
-        );
-      })}
-    </List>
+    <>
+      <Stack direction={'row'} gap={1}>
+        <Chip
+          label={`All ${noteStore.getAllWords().length}`}
+          color={noteStore.filter === NotesFilter.All ? 'primary' : 'default'}
+          variant={noteStore.filter === NotesFilter.All ? 'filled' : 'outlined'}
+          onClick={() => noteStore.setFilter(NotesFilter.All)}
+        />
+        <Chip
+          label={`Saved ${noteStore.saveWords.length}`}
+          color={noteStore.filter === NotesFilter.Saved ? 'primary' : 'default'}
+          variant={
+            noteStore.filter === NotesFilter.Saved ? 'filled' : 'outlined'
+          }
+          onClick={() => noteStore.setFilter(NotesFilter.Saved)}
+        />
+      </Stack>
+      <List>
+        {filteredWords.map((word, i) => {
+          const ref = targetWord === word.korean ? currentItemRef : null;
+          return (
+            <Box key={i}>
+              <Item
+                korean={word.korean}
+                english={word.english}
+                ref={ref}
+                saved={word.saved}
+              />
+              <Divider />
+            </Box>
+          );
+        })}
+      </List>
+    </>
   );
 }
