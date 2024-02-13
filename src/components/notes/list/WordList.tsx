@@ -37,7 +37,12 @@ export function WordList() {
         const ref = targetWord === word.korean ? currentItemRef : null;
         return (
           <Box key={i}>
-            <Item korean={word.korean} english={word.english} ref={ref} />
+            <Item
+              korean={word.korean}
+              english={word.english}
+              ref={ref}
+              saved={word.saved}
+            />
             <Divider />
           </Box>
         );

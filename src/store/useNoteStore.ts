@@ -13,10 +13,17 @@ type NoteStore = {
   focusWord: string;
   setFocusWord: (word: string) => void;
   addWord: (word: string) => void;
-  getAllWords: () => { korean: string; english: string; addAt: number }[];
+  getAllWords: () => {
+    korean: string;
+    english: string;
+    addAt: number;
+    saved: boolean;
+  }[];
   addEnglish: (word: string, english: string) => void;
   editWord: (target: string, word: string) => void;
   deleteWord: (word: string) => void;
+  addSaveWord: (word: string) => void;
+  removeSaveWord: (word: string) => void;
 };
 
 export const useNoteStore = create(
@@ -25,6 +32,16 @@ export const useNoteStore = create(
       return {
         notes: {},
         saveWords: [],
+        addSaveWord: (word) => {
+          const saveWords = get().saveWords;
+          if (!saveWords.includes(word)) {
+            set({ saveWords: [...saveWords, word] });
+          }
+        },
+        removeSaveWord: (word) => {
+          const saveWords = get().saveWords;
+          set({ saveWords: saveWords.filter((w) => w !== word) });
+        },
         focusWord: '',
         setFocusWord: (word) => {
           set({ focusWord: word });
@@ -35,6 +52,7 @@ export const useNoteStore = create(
               korean: key,
               english: value.english,
               addAt: value.addAt,
+              saved: get().saveWords.includes(key),
             }))
             .sort((a, b) => b.addAt - a.addAt);
         },
